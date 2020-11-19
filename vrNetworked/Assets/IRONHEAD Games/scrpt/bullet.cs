@@ -9,7 +9,6 @@ public class bullet : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.TransformDirection(0, 0, 20);
     }
 
     private IEnumerator kill() {
@@ -23,6 +22,6 @@ public class bullet : MonoBehaviour
         Debug.Log("hit");
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        StartCoroutine(kill());
+      //  StartCoroutine(kill());
     }
 }

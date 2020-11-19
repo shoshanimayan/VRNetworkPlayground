@@ -20,12 +20,10 @@ public class NetworkGrabbing : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
     {
         if (isHeld)
         {
-            rb.isKinematic = true;
-            gameObject.layer = 13;//inhand
+           
         }
         else {
-            rb.isKinematic = false;
-            gameObject.layer = 8;//interactable
+
         }
     }
 
@@ -81,11 +79,15 @@ public class NetworkGrabbing : MonoBehaviourPunCallbacks, IPunOwnershipCallbacks
     [PunRPC]
     public void StartNetworkedGrabbing() {
         isHeld = true;
-        
+        rb.isKinematic = true;
+        gameObject.layer = 13;//inhand
+
     }
     [PunRPC]
     public void StopNetWorkedGrabbing() {
         isHeld = false;
+        rb.isKinematic = false;
+        gameObject.layer = 8;//interactable
     }
 
 }

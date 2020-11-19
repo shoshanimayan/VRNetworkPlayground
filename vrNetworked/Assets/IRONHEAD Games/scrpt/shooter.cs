@@ -23,8 +23,13 @@ public class shooter : MonoBehaviour
     public void OnSelectExit() { held = false; }
 
     public void OnActivate() {
-        if(held)
-            PhotonNetwork.Instantiate(bullet.name, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        if (held)
+        {
+
+            var clone = PhotonNetwork.Instantiate(bullet.name, spawnPoint.transform.position, spawnPoint.transform.rotation);
+            clone.GetComponent<Rigidbody>().velocity = transform.TransformDirection(new Vector3(0, 0, 20));
+        }
+           
     }
     // Update is called once per frame
    
