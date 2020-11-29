@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
+using Photon.Pun.UtilityScripts;
+
 public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
 {
     public GameObject LocalXrRig;
@@ -28,7 +30,7 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
             foreach (var item in teleportationAreas) {
                 item.teleportationProvider = LocalXrRig.GetComponent<TeleportationProvider>();
             }
-
+            PhotonNetwork.LocalPlayer.SetScore(0);
             mainAvatar.AddComponent<AudioListener>();
         }
         else {//remote
@@ -42,6 +44,9 @@ public class PlayerNetworkSetup : MonoBehaviourPunCallbacks
         if (playernNameText!= null) {
             playernNameText.text = photonView.Owner.NickName;
         }
+        Canvas[] canvases = GameObject.FindObjectsOfType<Canvas>();
+        foreach (Canvas c in canvases) { c.worldCamera = Camera.main; }
+        
     }
 
     // Update is called once per frame

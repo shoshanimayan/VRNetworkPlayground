@@ -23,18 +23,11 @@ public class DragWindow : Selectable, IPointerClickHandler, ISubmitHandler,IDrag
      //   canvas = transform.parent.GetComponent<Canvas>();
       //  text = GetComponent<TextMeshProUGUI>();
     }
-    public void OnDrag(PointerEventData eventData)
+    public void OnDrag(PointerEventData data)
     {
-        /*
-        Debug.Log(eventData.position);
-        Debug.Log(eventData.position - start);
-        Vector2 move = new Vector2((eventData.position.x + start.x) * canvas.transform.localScale.x, (eventData.position.y - start.y) * canvas.transform.localScale.y);
-        Debug.Log(move);
-        dragged.gameObject.transform.localPosition = move;
-         start = eventData.position;
-        */
-        //    dragged.anchoredPosition += eventData.delta/ canvas.scaleFactor;
-
+        Vector2 pos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, data.position, canvas.worldCamera, out pos);
+        dragged.transform.position = canvas.transform.TransformPoint(pos);
     }
 
 
@@ -55,7 +48,7 @@ public class DragWindow : Selectable, IPointerClickHandler, ISubmitHandler,IDrag
        // start = eventData.position;
     }
 
-    public override void OnPointerDown(PointerEventData eventData)
+   /* public override void OnPointerDown(PointerEventData eventData)
     {
         
        Debug.Log(this.gameObject.name + " Was Clicked.");
@@ -63,9 +56,9 @@ public class DragWindow : Selectable, IPointerClickHandler, ISubmitHandler,IDrag
         Debug.Log(start);
         
 
-    }
+    }*/
 
-    public override void OnPointerUp(PointerEventData eventData)
+  /*  public override void OnPointerUp(PointerEventData eventData)
     {
          Debug.Log(eventData.position);
          Debug.Log(eventData.position - start);
@@ -73,7 +66,7 @@ public class DragWindow : Selectable, IPointerClickHandler, ISubmitHandler,IDrag
         Debug.Log(move);
         move = new Vector2(dragged.gameObject.transform.localPosition.x + move.x, dragged.gameObject.transform.localPosition.y + move.y);
         dragged.gameObject.transform.localPosition = move;
-    }
+    }*/
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
